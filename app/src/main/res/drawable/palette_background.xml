@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/unique1">
+        <shape
+            android:shape="rectangle"
+            android:thickness="100dp">
+        </shape>
+    </item>
+    <item
+        android:drawable="@color/unique2"
+        android:left="120dp">
+        <shape android:shape="rectangle"></shape>
+    </item>
+    <item
+        android:drawable="@color/unique3"
+        android:left="275dp">
+        <shape android:shape="rectangle"></shape>
+    </item>
+</layer-list>
+
