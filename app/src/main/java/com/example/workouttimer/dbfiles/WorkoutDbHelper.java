@@ -26,14 +26,8 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
 
         // linking the helper
         db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS exercises");
-        db.execSQL("DROP TABLE IF EXISTS workouts");
-        db.execSQL(SQL_DELETE_ENTRIES);
-        db.execSQL(SQL_CREATE_ENTRIES);
-        db.execSQL(SQL_CREATE_ENTRIES_WORKOUTS);
-        this.workoutDbTestInit();
         this.returnAllWorkouts();
-        this.insertDataOne();
+
 
         // adding to the database
 //        ContentValues values = new ContentValues();
@@ -47,6 +41,8 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS workouts");
         db.execSQL(SQL_CREATE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES_WORKOUTS);
+//        this.workoutDbTestInit();
+//        this.insertDataOne();
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -61,6 +57,19 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
 
     public void onDestroy() {
         db.close();
+    }
+
+    public void addWorkout (String workout) {
+        String query =
+                "INSERT INTO " + WorkoutEntryContract.WorkoutEntry.TABLE_NAME_TWO + "("+ WorkoutEntryContract.WorkoutEntry.COL2_NAME_ONE +")" +
+                "VALUES (\"" + workout + "\");";
+        db.execSQL(query);
+    }
+
+    public void addWorkout2 (String workout) {
+        ContentValues values = new ContentValues();
+        values.put(WorkoutEntryContract.WorkoutEntry.COL2_NAME_ONE,workout);
+        long newRowId = db.insert (WorkoutEntryContract.WorkoutEntry.TABLE_NAME_TWO,null,values);
     }
 
 

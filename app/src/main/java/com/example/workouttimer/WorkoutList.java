@@ -2,18 +2,24 @@ package com.example.workouttimer;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableLayout;
 
+import com.example.workouttimer.databinding.FragmentSecondBinding;
+import com.example.workouttimer.databinding.FragmentWorkoutListBinding;
 import com.example.workouttimer.dbfiles.WorkoutDbHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,14 +30,8 @@ import java.util.List;
  */
 public class WorkoutList extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentWorkoutListBinding binding;
+    private ArrayAdapter<String> adapter;
 
     public WorkoutList() {
         // Required empty public constructor
@@ -46,42 +46,72 @@ public class WorkoutList extends Fragment {
      * @return A new instance of fragment WorkoutList.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkoutList newInstance (String param1, String param2) {
+    public static WorkoutList newInstance(String param1, String param2) {
         WorkoutList fragment = new WorkoutList();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         WorkoutDbHelper dbhelper = new WorkoutDbHelper(getActivity());
-        String [] workouts = dbhelper.returnAllWorkouts();
-        Log.d("WorkoutList","Returned all workouts");
+        ArrayList<String> workouts = new ArrayList<String>();
+        for (String s: dbhelper.returnAllWorkouts()) {
+            workouts.add(s);
+        }
+        Log.d("WorkoutList", "Returned all workouts");
         dbhelper.close();
 
 
         // Inflate the layout for this fragment
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,workouts);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, workouts);
 
-        View view = inflater.inflate(R.layout.fragment_workout_list, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.workout_list);
-        listView.setAdapter(adapter);
+        binding = FragmentWorkoutListBinding.inflate(inflater, container, false);
+        binding.workoutList.setAdapter(adapter);
 
-        return view;
+        return binding.getRoot();
+
     }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.addWorkoutName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Log.d("WorkoutList-ovc","Cleared");
+               String content = binding.workoutName.getText().toString();
+               Log.d("WorkoutList-ovc",content);
+
+
+                WorkoutDbHelper dbhelper = new WorkoutDbHelper(getActivity());
+                dbhelper.addWorkout2(content);
+                Log.d("WorkoutList-oc", "Added workout");
+
+
+                adapter.add(content);
+                adapter.notifyDataSetChanged();
+                dbhelper.close();
+
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+
+
 }
