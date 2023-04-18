@@ -4,12 +4,17 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TableLayout;
 
+import com.example.workouttimer.dbfiles.WorkoutDbHelper;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -62,9 +67,16 @@ public class WorkoutList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        WorkoutDbHelper dbhelper = new WorkoutDbHelper(getActivity());
+        String [] workouts = dbhelper.returnAllWorkouts();
+        Log.d("WorkoutList","Returned all workouts");
+        dbhelper.close();
+
+
         // Inflate the layout for this fragment
-        String[] workoutListArray = new String [] {"cat","dog"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,workoutListArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,workouts);
 
         View view = inflater.inflate(R.layout.fragment_workout_list, container, false);
         ListView listView = (ListView) view.findViewById(R.id.workout_list);

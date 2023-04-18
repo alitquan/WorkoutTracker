@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         // creating the database
         WorkoutDbHelper dbhelper = new WorkoutDbHelper(getApplicationContext());
-        dbhelper.insertDataOne();
-        String [] workouts = dbhelper.returnAll();
-        Log.d("main", "returning all");
-        Log.d("main",Arrays.toString(workouts));
+//        dbhelper.insertDataOne();
+//        String [] workouts = dbhelper.returnAll();
+//        Log.d("main", "returning all");
+//        Log.d("main",Arrays.toString(workouts));
 //        dbhelper.testQuery();
 
         // filling up tables

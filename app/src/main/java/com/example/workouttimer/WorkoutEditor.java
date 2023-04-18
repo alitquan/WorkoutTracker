@@ -6,11 +6,9 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,9 +22,10 @@ import com.example.workouttimer.dbfiles.WorkoutDbHelper;
 
 import java.util.Arrays;
 
-public class SecondFragment extends Fragment {
+public class WorkoutEditor extends Fragment {
 
     private FragmentSecondBinding binding;
+
 
     @Override
     public View onCreateView(
@@ -43,7 +42,7 @@ public class SecondFragment extends Fragment {
 
         TableLayout tableLayout = (TableLayout) getView().findViewById(R.id.tableLayout1);
         WorkoutDbHelper dbhelper = new WorkoutDbHelper(getActivity());
-        String [] workouts = dbhelper.returnAll();
+        String [] workouts = dbhelper.returnAllExercises();
         Log.d("SecondFragment", "returning all");
         Log.d("SecondFragment", Arrays.toString(workouts));
         dbhelper.close();
@@ -84,7 +83,7 @@ public class SecondFragment extends Fragment {
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
+                NavHostFragment.findNavController(WorkoutEditor.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
