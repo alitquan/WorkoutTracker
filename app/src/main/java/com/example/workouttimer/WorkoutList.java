@@ -4,18 +4,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableLayout;
 
-import com.example.workouttimer.databinding.FragmentSecondBinding;
+
 import com.example.workouttimer.databinding.FragmentWorkoutListBinding;
 import com.example.workouttimer.dbfiles.WorkoutDbHelper;
 
@@ -73,9 +76,29 @@ public class WorkoutList extends Fragment {
 
         binding = FragmentWorkoutListBinding.inflate(inflater, container, false);
         binding.workoutList.setAdapter(adapter);
+        binding.workoutList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                    String word = parent.getItemAtPosition(i).toString();
+                    Log.d("WorkoutList-click",word);
+                    initiateEditor("word");
+            }
+        });
+
+
 
         return binding.getRoot();
 
+    }
+
+
+    private void initiateEditor(String data) {
+        WorkoutEditor editor = WorkoutEditor.newInstance(data); // Pass the data as an argument
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.workoutlist_container,editor);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -100,10 +123,12 @@ public class WorkoutList extends Fragment {
                 dbhelper.close();
 
 
+
             }
         });
 
     }
+
 
 
     @Override

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // creating the database
         WorkoutDbHelper dbhelper = new WorkoutDbHelper(getApplicationContext());
+        dbhelper.insertDataOne();
 //        dbhelper.insertDataOne();
 //        String [] workouts = dbhelper.returnAll();
 //        Log.d("main", "returning all");
@@ -69,13 +70,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 */
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override

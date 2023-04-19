@@ -17,14 +17,31 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.workouttimer.databinding.FragmentSecondBinding;
+import com.example.workouttimer.databinding.FragmentWorkoutEditorBinding;
 import com.example.workouttimer.dbfiles.WorkoutDbHelper;
 
 import java.util.Arrays;
 
 public class WorkoutEditor extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentWorkoutEditorBinding binding;
+
+    public static WorkoutEditor newInstance (String data) {
+        WorkoutEditor newFragment = new WorkoutEditor();
+        Bundle args = new Bundle();
+        args.putString("chosenWorkout",data);
+        newFragment.setArguments(args);
+        return newFragment;
+    }
+
+    private String getArgs() {
+         Bundle args = getArguments();
+
+         if (args != null) {
+             return args.getString("chosenWorkout");
+         }
+         return null;
+    }
 
 
     @Override
@@ -33,7 +50,7 @@ public class WorkoutEditor extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentWorkoutEditorBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

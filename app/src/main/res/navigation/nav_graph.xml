@@ -23,12 +23,18 @@
         android:id="@+id/SecondFragment"
         android:name="com.example.workouttimer.WorkoutEditor"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_workout_editor">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/WorkoutContainer"
+        android:name="com.example.workouttimer.WorkoutContainer"
+        android:label="WorkoutContainer"
+        tools:layout="@layout/fragment_workout_container"/>
 
 
     <fragment
@@ -39,7 +45,8 @@
         >
         <action
             android:id="@+id/action_MainMenu_to_WorkoutList"
-            app:destination="@id/workoutList" />
+            app:destination="@id/WorkoutContainer"/>
+<!--            app:destination="@id/workoutList" />-->
         <action
             android:id="@+id/action_MainMenuToEnd"
             app:destination="@+id/SecondFragment"
