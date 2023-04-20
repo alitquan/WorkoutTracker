@@ -73,16 +73,19 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
     }
 
 
+    // insert data into exercises table
     public void insertDataOne () {
         ContentValues values = new ContentValues();
         values.put(WorkoutEntryContract.WorkoutEntry.COL_NAME_ONE, "Pushups");
         values.put(WorkoutEntryContract.WorkoutEntry.COL_NAME_TWO, 1);
+        values.put(WorkoutEntryContract.WorkoutEntry.COL_NAME_THREE,"CHEST");
         long newRowId = db.insert(WorkoutEntryContract.WorkoutEntry.TABLE_NAME, null, values);
         Log.e("DB", "inserted one");
 
         ContentValues values2 = new ContentValues();
         values2.put(WorkoutEntryContract.WorkoutEntry.COL_NAME_ONE, "Pullups");
         values2.put(WorkoutEntryContract.WorkoutEntry.COL_NAME_TWO, 2);
+        values2.put(WorkoutEntryContract.WorkoutEntry.COL_NAME_THREE,"BACK");
         long newRowId2 = db.insert(WorkoutEntryContract.WorkoutEntry.TABLE_NAME, null, values2);
         Log.e("DB", "inserted two");
     }
@@ -99,7 +102,7 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
     }
 
     public String [] returnAllExercises () {
-        String [] projection = {WorkoutEntryContract.WorkoutEntry.COL_NAME_ONE,WorkoutEntryContract.WorkoutEntry.COL_NAME_TWO};
+        String [] projection = {WorkoutEntryContract.WorkoutEntry.COL_NAME_ONE,WorkoutEntryContract.WorkoutEntry.COL_NAME_TWO,WorkoutEntryContract.WorkoutEntry.COL_NAME_THREE};
         String retRow = "";
         String order = WorkoutEntryContract.WorkoutEntry.COL_NAME_ONE + " ASC";
         Cursor cursor = db.query(
@@ -119,9 +122,10 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
             Log.d("returnAllExercises", "New Row");
             @SuppressLint("Range") String col1Val = cursor.getString(cursor.getColumnIndex(WorkoutEntryContract.WorkoutEntry.COL_NAME_ONE));
             @SuppressLint("Range") String col2Val = cursor.getString(cursor.getColumnIndex(WorkoutEntryContract.WorkoutEntry.COL_NAME_TWO));
+            @SuppressLint("Range") String col3Val = cursor.getString(cursor.getColumnIndex(WorkoutEntryContract.WorkoutEntry.COL_NAME_THREE));
             Log.d("returnAllExercises",col1Val);
             Log.d("returnAllExercises",col2Val);
-            retRow = col1Val+","+col2Val;
+            retRow = col1Val+","+col2Val+","+col3Val;
             retVal[ele++] = retRow;
         }
         return retVal;
@@ -159,6 +163,10 @@ public class WorkoutDbHelper extends SQLiteOpenHelper {
         return retVal;
 
     }
+
+//    public String [] returnAllExercises(String workout) {
+//
+//    }
 
 
 

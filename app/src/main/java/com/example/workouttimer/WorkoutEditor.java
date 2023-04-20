@@ -24,12 +24,14 @@ import java.util.Arrays;
 
 public class WorkoutEditor extends Fragment {
 
+    public static final String workoutKey = "chosenWorkout";
+
     private FragmentWorkoutEditorBinding binding;
 
     public static WorkoutEditor newInstance (String data) {
         WorkoutEditor newFragment = new WorkoutEditor();
         Bundle args = new Bundle();
-        args.putString("chosenWorkout",data);
+        args.putString(workoutKey,data);
         newFragment.setArguments(args);
         return newFragment;
     }
@@ -96,12 +98,25 @@ public class WorkoutEditor extends Fragment {
              */
         }
 
-
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        binding.addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(WorkoutEditor.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                Bundle bundle = getArguments();
+                Log.d("WorkoutEditor-click","foo");
+                Log.d("WorkoutEditor-click",Integer.toString(bundle.size()));
+                Log.d("WorkoutEditor-click",bundle.getString(workoutKey));
+
+                String content = binding.exerciseName.getText().toString();
+                Log.d("WorkoutEditor-click",content);
+
+//                if (bundle!=null) {
+//                    String workout = bundle.getString(workoutKey);
+//                    Log.d("WorkoutEditor-click", workout);
+//                }
+//                else {
+//                    Log.d("WorkoutEditor-click", "Did not work");
+//                }
+
             }
         });
     }
