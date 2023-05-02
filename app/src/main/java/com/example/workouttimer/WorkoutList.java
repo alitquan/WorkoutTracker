@@ -81,7 +81,7 @@ public class WorkoutList extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                     String word = parent.getItemAtPosition(i).toString();
                     Log.d("WorkoutList-click",word);
-                    initiateEditor("word");
+                    initiateEditor(word);
             }
         });
 
@@ -93,6 +93,10 @@ public class WorkoutList extends Fragment {
 
 
     private void initiateEditor(String data) {
+        WorkoutDbHelper dbhelper = new WorkoutDbHelper(getActivity());
+        dbhelper.returnRelevantExercises(data);
+        dbhelper.close();
+
         WorkoutEditor editor = WorkoutEditor.newInstance(data); // Pass the data as an argument
         FragmentManager manager = getParentFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

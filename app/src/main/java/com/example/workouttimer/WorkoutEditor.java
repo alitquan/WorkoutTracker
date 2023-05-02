@@ -64,6 +64,7 @@ public class WorkoutEditor extends Fragment {
         String [] workouts = dbhelper.returnAllExercises();
         Log.d("SecondFragment", "returning all");
         Log.d("SecondFragment", Arrays.toString(workouts));
+//        dbhelper.returnRelevantExercises();
         dbhelper.close();
 
 
