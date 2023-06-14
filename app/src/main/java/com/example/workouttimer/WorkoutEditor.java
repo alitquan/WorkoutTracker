@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.workouttimer.databinding.FragmentWorkoutEditorBinding;
 import com.example.workouttimer.dbfiles.WorkoutDbHelper;
+import com.example.workouttimer.subfragments.EditDialog;
 
 import java.util.Arrays;
 
@@ -102,6 +103,9 @@ public class WorkoutEditor extends Fragment {
         binding.addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditDialog dialogFragment = new EditDialog();
+                dialogFragment.show(getParentFragmentManager(), "EditDialog");
+                Log.d("WorkoutEd-CLick" ,"fu,");
 //                Bundle bundle = getArguments();
 //                Log.d("WorkoutEditor-click","foo");
 //                Log.d("WorkoutEditor-click",Integer.toString(bundle.size()));

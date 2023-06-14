@@ -120,12 +120,14 @@
                     android:id="@+id/startWorkout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:layout_weight=".50"
                     android:padding="1dp"
                     android:singleLine="true"
                     android:text="Start Workout"
-                    android:textSize="10dp" />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
