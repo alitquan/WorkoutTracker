@@ -9,50 +9,28 @@
     tools:context=".WorkoutEditor">
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
 
         <LinearLayout
             android:id="@+id/addExerciseContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:orientation="vertical">
+          >
 
-            <LinearLayout
-                android:id="@+id/exerciseLinear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
-
-                <EditText
-                    android:id="@+id/exerciseName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight=".7"
-                    android:hint="Enter Name of Workout" />
-
-                <Button
-                    android:id="@+id/addExercise"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight=".30"
-                    android:padding="1dp"
-                    android:singleLine="true"
-                    android:text="ADD EXERCISE"
-                    android:textSize="10dp" />
-            </LinearLayout>
 
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="30dp"
              >
 
@@ -93,24 +71,71 @@
 
             </FrameLayout>
 
-
-            <FrameLayout
+            <LinearLayout
+                android:id="@+id/exerciseLinear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+
+
+                <Button
+                    android:id="@+id/addExercise"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight=".50"
+                    android:padding="1dp"
+                    android:singleLine="true"
+                    android:text="ADD EXERCISE"
+                    android:textSize="10dp" />
 
                 <Button
                     android:id="@+id/button_second"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:text="@string/previous"
                     android:layout_gravity="center"
                     />
 
 
-            </FrameLayout>
+<!--                <Button-->
+<!--                    android:id="@+id/button_second"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight=".50"-->
+<!--                    android:text="@string/previous"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    />-->
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <Button
+                    android:id="@+id/startWorkout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight=".50"
+                    android:padding="1dp"
+                    android:singleLine="true"
+                    android:text="Start Workout"
+                    android:textSize="10dp" />
 
+            </LinearLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/exerciseName"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight=".7"-->
+<!--                android:hint="Enter Name of Exercise" />-->
 
 
         </LinearLayout>

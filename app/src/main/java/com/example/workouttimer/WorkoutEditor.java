@@ -102,13 +102,13 @@ public class WorkoutEditor extends Fragment {
         binding.addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = getArguments();
-                Log.d("WorkoutEditor-click","foo");
-                Log.d("WorkoutEditor-click",Integer.toString(bundle.size()));
-                Log.d("WorkoutEditor-click",bundle.getString(workoutKey));
-
-                String content = binding.exerciseName.getText().toString();
-                Log.d("WorkoutEditor-click",content);
+//                Bundle bundle = getArguments();
+//                Log.d("WorkoutEditor-click","foo");
+//                Log.d("WorkoutEditor-click",Integer.toString(bundle.size()));
+//                Log.d("WorkoutEditor-click",bundle.getString(workoutKey));
+//
+//                String content = binding.exerciseName.getText().toString();
+//                Log.d("WorkoutEditor-click",content);
 
 //                if (bundle!=null) {
 //                    String workout = bundle.getString(workoutKey);
